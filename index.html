@@ -23,17 +23,33 @@
   <iframe id="preview"></iframe>
 
   <script>
-    const editor = document.getElementById('editor');
-    const preview = document.getElementById('preview');
+  const editor = document.getElementById('editor');
+  const preview = document.getElementById('preview');
 
-    function updatePreview() {
-      const content = editor.value;
-      preview.srcdoc = content;
+  function updatePreview() {
+    const content = editor.value;
+    preview.srcdoc = content;
+  }
+
+  editor.addEventListener('input', updatePreview);
+  window.addEventListener('load', updatePreview);
+  editor.addEventListener('keydown', function(e) {
+    
+    if (e.key === 'Tab') {
+      e.preventDefault(); 
+      const start = this.selectionStart;
+      const end = this.selectionEnd;
+
+      const tab = "  ";
+      this.value = this.value.substring(0, start) + tab + this.value.substring(end);
+
+      this.selectionStart = this.selectionEnd = start + tab.length;
+
+      updatePreview();
     }
+  });
+</script>
 
-    editor.addEventListener('input', updatePreview);
-    window.addEventListener('load', updatePreview);
-  </script>
 
 </body>
 </html>
