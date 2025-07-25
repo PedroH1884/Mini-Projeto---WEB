@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Editor HTML com Preview ao Vivo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <textarea id="editor" spellcheck="false">
+<!-- Digite seu código HTML aqui -->
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="preview-style.css">
+</head>
+<body>
+  <h1>Olá, mundo!</h1>
+</body>
+</html>
+  </textarea>
+
+  <iframe id="preview"></iframe>
+
+  <script>
+    const editor = document.getElementById('editor');
+    const preview = document.getElementById('preview');
+
+    function updatePreview() {
+      const content = editor.value;
+      preview.srcdoc = content;
+    }
+
+    editor.addEventListener('input', updatePreview);
+    window.addEventListener('load', updatePreview);
+  </script>
+
+</body>
+</html>
