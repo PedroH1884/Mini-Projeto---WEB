@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Editor HTML com Preview ao Vivo</title>
-  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="m-0 p-5 h-screen box-border flex gap-5 bg-gray-200 font-sans">
 
-  <textarea id="editor" spellcheck="false">
+  <textarea
+    id="editor"
+    spellcheck="false"
+    class="w-1/2 h-full p-4 text-sm font-mono bg-gray-900 text-gray-200 rounded-xl shadow-lg resize-none focus:outline-none"
+  >
 <!-- Digite seu código HTML aqui -->
 <!DOCTYPE html>
 <html>
@@ -20,36 +24,37 @@
 </html>
   </textarea>
 
-  <iframe id="preview"></iframe>
+  <iframe
+    id="preview"
+    class="w-1/2 h-full bg-white rounded-xl shadow-lg border-0"
+  ></iframe>
 
   <script>
-  const editor = document.getElementById('editor');
-  const preview = document.getElementById('preview');
+    const editor = document.getElementById('editor');
+    const preview = document.getElementById('preview');
 
-  function updatePreview() {
-    const content = editor.value;
-    preview.srcdoc = content;
-  }
-
-  editor.addEventListener('input', updatePreview);
-  window.addEventListener('load', updatePreview);
-  editor.addEventListener('keydown', function(e) {
-    
-    if (e.key === 'Tab') {
-      e.preventDefault(); 
-      const start = this.selectionStart;
-      const end = this.selectionEnd;
-
-      const tab = "  ";
-      this.value = this.value.substring(0, start) + tab + this.value.substring(end);
-
-      this.selectionStart = this.selectionEnd = start + tab.length;
-
-      updatePreview();
+    function updatePreview() {
+      const content = editor.value;
+      preview.srcdoc = content;
     }
-  });
-</script>
 
+    editor.addEventListener('input', updatePreview);
+    window.addEventListener('load', updatePreview);
+
+    editor.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
+
+        const tab = "  "; // dois espaços ou "\t" para tab real
+        this.value = this.value.substring(0, start) + tab + this.value.substring(end);
+        this.selectionStart = this.selectionEnd = start + tab.length;
+
+        updatePreview();
+      }
+    });
+  </script>
 
 </body>
 </html>
