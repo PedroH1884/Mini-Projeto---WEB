@@ -12,14 +12,18 @@
     spellcheck="false"
     class="w-1/2 h-full p-4 text-sm font-mono bg-gray-900 text-gray-200 rounded-xl shadow-lg resize-none focus:outline-none"
   >
-<!-- Digite seu código HTML aqui -->
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="preview-style.css">
+  <title>Preview</title>
 </head>
-<body>
-  <h1>Olá, mundo!</h1>
+<body class="p-4">
+  <h1 class="text-3xl font-bold text-blue-600">Olá, mundo!</h1>
+  <p class="mt-2 text-gray-700">Agora o Tailwind funciona no preview!</p>
+  
+  <button class="mt-4 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700 transition">
+    Botão com Estilo
+  </button>
 </body>
 </html>
   </textarea>
@@ -34,9 +38,16 @@
     const preview = document.getElementById('preview');
 
     function updatePreview() {
-      const content = editor.value;
-      preview.srcdoc = content;
-    }
+  const editorContent = editor.value;
+
+  // 1. Crie a tag de script como uma variável separada
+  const tailwindScript = '<script src="https://cdn.tailwindcss.com"><\/script>';
+  
+  // 2. Use a variável na função replace()
+  const finalContent = editorContent.replace('</head>', tailwindScript + '</head>');
+  
+  preview.srcdoc = finalContent;
+}
 
     editor.addEventListener('input', updatePreview);
     window.addEventListener('load', updatePreview);
@@ -47,7 +58,7 @@
         const start = this.selectionStart;
         const end = this.selectionEnd;
 
-        const tab = "  "; // dois espaços ou "\t" para tab real
+        const tab = "  ";
         this.value = this.value.substring(0, start) + tab + this.value.substring(end);
         this.selectionStart = this.selectionEnd = start + tab.length;
 
