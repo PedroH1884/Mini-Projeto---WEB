@@ -42,7 +42,7 @@ module.exports = {
 npx tailwindcss -i ./style.css -o ./dist/output.css --watch
 
 8. Conecte ele no seu HTML utilizando
-<link rel="stylesheet" href="dist/output.css">
+"<link rel="stylesheet" href="dist/output.css">"
 
 # Passo-a-Passo para o desenvolvimento:
 
