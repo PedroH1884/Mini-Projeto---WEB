@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class=""> <head>
+<html lang="pt-BR" class=""> 
+<head>
   <meta charset="UTF-8">
   <title>Editor HTML com Preview ao Vivo</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Configuração para o modo escuro do Tailwind
     tailwind.config = {
-      darkMode: 'class', // Habilita o modo escuro baseado em classe no elemento <html>
+      darkMode: 'class',
     }
   </script>
   <style>
-    /* Estilo para a transição suave de cores */
     body, .bg-white, .bg-gray-900, .bg-gray-200 {
       transition: background-color 0.3s ease, color 0.3s ease;
     }
@@ -18,16 +17,16 @@
 </head>
 <body class="bg-gray-200 dark:bg-gray-800 font-sans">
 
-  <nav class="bg-white dark:bg-gray-900 shadow-md p-4 flex justify-between items-center">
-    <h1 class="text-xl font-bold text-gray-800 dark:text-gray-200">Executador automático de código</h1>
-    <div class="flex items-center gap-4">
-      <button id="clearBtn" title="Limpar Editor" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+  <nav class="bg-white dark:bg-gray-900 shadow-lg p-5 flex justify-between items-center rounded-b-xl transition-all duration-300">
+    <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">Editor de Código com Preview ao Vivo</h1>
+    <div class="flex gap-4">
+      <button id="clearBtn" class="p-3 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-transform transform hover:scale-105">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
         </svg>
       </button>
       
-      <button id="darkModeBtn" title="Alternar Modo Escuro" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+      <button id="darkModeBtn" class="p-3 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-transform transform hover:scale-105">
         <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
         </svg>
@@ -36,7 +35,7 @@
         </svg>
       </button>
 
-      <button id="saveBtn" title="Salvar como HTML" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+      <button id="saveBtn" class="p-3 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-transform transform hover:scale-105">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
@@ -44,31 +43,99 @@
     </div>
   </nav>
 
-  <main class="p-5 h-[calc(100vh-100px)] box-border flex gap-5">
-    <textarea
-      id="editor"
-      spellcheck="false"
-      class="w-1/2 h-full p-4 text-sm font-mono bg-gray-900 text-gray-200 rounded-xl shadow-lg resize-none focus:outline-none"
-    >
+  <main class="p-5 h-[calc(100vh-100px)] box-border flex flex-col md:flex-row gap-5">
+    <div class="w-full md:w-1/2 flex flex-col gap-2">
+      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-600 pb-1">Terminal de Edição</h2>
+      <textarea
+        id="editor"
+        spellcheck="false"
+        class="w-full h-full p-6 text-sm font-mono bg-gray-900 text-gray-200 rounded-2xl shadow-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100"
+      >
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <title>Preview</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplo de Site com Tailwind CSS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .transition-all {
+      transition: all 0.3s ease;
+    }
+  </style>
 </head>
-<body class="p-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200">
-  <h1 class="text-3xl font-bold text-blue-600 dark:text-blue-400">Olá, mundo!</h1>
-  <p class="mt-2">Agora o Tailwind funciona no preview!</p>
-  <button class="mt-4 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700 transition">
-    Botão com Estilo
-  </button>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans">
+
+  <nav class="bg-blue-600 dark:bg-blue-900 p-5 shadow-lg">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <a href="#" class="text-white text-2xl font-bold">Site Explicativo</a>
+      <ul class="flex space-x-6">
+        <li><a href="#home" class="text-white hover:text-yellow-300 transition-all">Home</a></li>
+        <li><a href="#about" class="text-white hover:text-yellow-300 transition-all">Sobre</a></li>
+        <li><a href="#contact" class="text-white hover:text-yellow-300 transition-all">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="home" class="bg-cover bg-center h-screen relative" style="background-image: url('https://via.placeholder.com/1200x800');">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="max-w-6xl mx-auto text-center text-white relative z-10 p-10">
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Tailwind CSS: Flexibilidade e Performance</h1>
+      <p class="text-lg md:text-2xl mb-6">Construa interfaces modernas e responsivas com facilidade e rapidez.</p>
+      <a href="#about" class="px-6 py-3 bg-blue-500 hover:bg-blue-700 text-white rounded-full text-xl transition-all">Saiba Mais</a>
+    </div>
+  </section>
+
+  <section id="about" class="py-20 bg-white dark:bg-gray-800">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6">Sobre o Tailwind CSS</h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+        O Tailwind é um framework de CSS utilitário que permite a construção rápida de interfaces modernas. Ao invés de escrever CSS personalizado, você utiliza classes diretamente no HTML para definir estilos.
+      </p>
+      <div class="flex flex-wrap justify-center gap-10">
+        <div class="w-80 bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center">
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Responsividade</h3>
+          <p class="text-gray-600 dark:text-gray-300">Com Tailwind, é fácil criar layouts responsivos. As classes como <code class="text-blue-500">sm:</code>, <code class="text-blue-500">md:</code>, <code class="text-blue-500">lg:</code> ajudam a definir como o layout se adapta a diferentes tamanhos de tela.</p>
+        </div>
+        <div class="w-80 bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center">
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Tipografia</h3>
+          <p class="text-gray-600 dark:text-gray-300">Tailwind oferece classes simples para alterar fontes, tamanhos e estilos de texto, com exemplos como <code class="text-blue-500">text-xl</code>, <code class="text-blue-500">font-bold</code> e <code class="text-blue-500">uppercase</code>.</p>
+        </div>
+        <div class="w-80 bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center">
+          <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Espaçamento</h3>
+          <p class="text-gray-600 dark:text-gray-300">O Tailwind oferece um controle total sobre o espaçamento com classes como <code class="text-blue-500">m-4</code> (margem), <code class="text-blue-500">p-4</code> (padding), <code class="text-blue-500">mt-10</code> (margem superior), e assim por diante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="bg-blue-600 dark:bg-blue-900 py-20">
+    <div class="max-w-6xl mx-auto text-center text-white">
+      <h2 class="text-3xl font-bold mb-6">Entre em Contato</h2>
+      <p class="text-lg mb-6">Quer saber mais sobre como o Tailwind pode melhorar seu fluxo de trabalho? Entre em contato conosco!</p>
+      <a href="mailto:phmc3@aluno.ifnmg.edu.br" class="px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-black rounded-full text-xl transition-all">Fale Conosco</a>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="bg-gray-800 text-white py-6">
+    <div class="max-w-6xl mx-auto text-center">
+      <p>&copy; 2025 Mini-Projeto. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
 </body>
 </html>
-    </textarea>
 
-    <iframe
-      id="preview"
-      class="w-1/2 h-full bg-white dark:bg-gray-900 rounded-xl shadow-lg border-0"
-    ></iframe>
+      </textarea>
+    </div>
+    <div class="w-full md:w-1/2 flex flex-col gap-2">
+      <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-600 pb-1">Terminal de Visualização</h2>
+      <iframe
+        id="preview"
+        class="w-full h-full bg-white dark:bg-gray-900 rounded-2xl shadow-xl border-0"
+      ></iframe>
+    </div>
   </main>
 
   <script>
@@ -76,15 +143,13 @@
     const preview = document.getElementById('preview');
     
     // --- FUNÇÕES PRINCIPAIS ---
-
     function updatePreview() {
       const editorContent = editor.value;
       const isDarkMode = document.documentElement.classList.contains('dark');
 
-      // Adiciona o script do Tailwind e a classe dark/light ao HTML do preview
       let finalContent = editorContent.replace(
         '<head>', 
-        '<head><script src="https://cdn.tailwindcss.com"><\/script>'
+        '<head><script src="https://cdn.tailwindcss.com"><\/script>' // Adiciona o script do Tailwind
       );
       
       if (isDarkMode) {
@@ -94,9 +159,7 @@
       preview.srcdoc = finalContent;
     }
 
-    // --- LÓGICA DOS BOTÕES ---
-
-    // 1. Botão Limpar
+    // Botão Limpar
     const clearBtn = document.getElementById('clearBtn');
     clearBtn.addEventListener('click', () => {
       const confirmClear = confirm("Você tem certeza que deseja limpar todo o código?");
@@ -106,7 +169,7 @@
       }
     });
 
-    // 2. Botão Modo Escuro
+    // Botão Modo Escuro
     const darkModeBtn = document.getElementById('darkModeBtn');
     const moonIcon = document.getElementById('moonIcon');
     const sunIcon = document.getElementById('sunIcon');
@@ -123,10 +186,10 @@
         moonIcon.classList.remove('hidden');
         sunIcon.classList.add('hidden');
       }
-      updatePreview(); // Atualiza o preview para refletir a mudança de tema
+      updatePreview();
     });
 
-    // 3. Botão Salvar
+    // Botão Salvar
     const saveBtn = document.getElementById('saveBtn');
     saveBtn.addEventListener('click', () => {
       const blob = new Blob([editor.value], { type: 'text/html' });
@@ -137,11 +200,8 @@
       URL.revokeObjectURL(a.href);
     });
 
-    // --- EVENT LISTENERS ---
-
     editor.addEventListener('input', updatePreview);
     
-    // Verifica o tema salvo no localStorage ao carregar a página
     window.addEventListener('load', () => {
       if (localStorage.getItem('theme') === 'dark') {
         document.documentElement.classList.add('dark');
