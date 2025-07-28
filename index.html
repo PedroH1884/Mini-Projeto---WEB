@@ -1,67 +1,164 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<html lang="pt-BR" class=""> <head>
   <meta charset="UTF-8">
   <title>Editor HTML com Preview ao Vivo</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Configuração para o modo escuro do Tailwind
+    tailwind.config = {
+      darkMode: 'class', // Habilita o modo escuro baseado em classe no elemento <html>
+    }
+  </script>
+  <style>
+    /* Estilo para a transição suave de cores */
+    body, .bg-white, .bg-gray-900, .bg-gray-200 {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  </style>
 </head>
-<body class="m-0 p-5 h-screen box-border flex gap-5 bg-gray-200 font-sans">
+<body class="bg-gray-200 dark:bg-gray-800 font-sans">
 
-  <textarea
-    id="editor"
-    spellcheck="false"
-    class="w-1/2 h-full p-4 text-sm font-mono bg-gray-900 text-gray-200 rounded-xl shadow-lg resize-none focus:outline-none"
-  >
+  <nav class="bg-white dark:bg-gray-900 shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-gray-800 dark:text-gray-200">Executador automático de código</h1>
+    <div class="flex items-center gap-4">
+      <button id="clearBtn" title="Limpar Editor" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+      </button>
+      
+      <button id="darkModeBtn" title="Alternar Modo Escuro" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+        <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+        <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      </button>
+
+      <button id="saveBtn" title="Salvar como HTML" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <main class="p-5 h-[calc(100vh-100px)] box-border flex gap-5">
+    <textarea
+      id="editor"
+      spellcheck="false"
+      class="w-1/2 h-full p-4 text-sm font-mono bg-gray-900 text-gray-200 rounded-xl shadow-lg resize-none focus:outline-none"
+    >
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
   <title>Preview</title>
 </head>
-<body class="p-4">
-  <h1 class="text-3xl font-bold text-blue-600">Olá, mundo!</h1>
-  <p class="mt-2 text-gray-700">Agora o Tailwind funciona no preview!</p>
-  
+<body class="p-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200">
+  <h1 class="text-3xl font-bold text-blue-600 dark:text-blue-400">Olá, mundo!</h1>
+  <p class="mt-2">Agora o Tailwind funciona no preview!</p>
   <button class="mt-4 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-700 transition">
     Botão com Estilo
   </button>
 </body>
 </html>
-  </textarea>
+    </textarea>
 
-  <iframe
-    id="preview"
-    class="w-1/2 h-full bg-white rounded-xl shadow-lg border-0"
-  ></iframe>
+    <iframe
+      id="preview"
+      class="w-1/2 h-full bg-white dark:bg-gray-900 rounded-xl shadow-lg border-0"
+    ></iframe>
+  </main>
 
   <script>
     const editor = document.getElementById('editor');
     const preview = document.getElementById('preview');
+    
+    // --- FUNÇÕES PRINCIPAIS ---
 
     function updatePreview() {
-  const editorContent = editor.value;
+      const editorContent = editor.value;
+      const isDarkMode = document.documentElement.classList.contains('dark');
 
-  // 1. Crie a tag de script como uma variável separada
-  const tailwindScript = '<script src="https://cdn.tailwindcss.com"><\/script>';
-  
-  // 2. Use a variável na função replace()
-  const finalContent = editorContent.replace('</head>', tailwindScript + '</head>');
-  
-  preview.srcdoc = finalContent;
-}
+      // Adiciona o script do Tailwind e a classe dark/light ao HTML do preview
+      let finalContent = editorContent.replace(
+        '<head>', 
+        '<head><script src="https://cdn.tailwindcss.com"><\/script>'
+      );
+      
+      if (isDarkMode) {
+        finalContent = finalContent.replace('<html', '<html class="dark"');
+      }
+
+      preview.srcdoc = finalContent;
+    }
+
+    // --- LÓGICA DOS BOTÕES ---
+
+    // 1. Botão Limpar
+    const clearBtn = document.getElementById('clearBtn');
+    clearBtn.addEventListener('click', () => {
+      const confirmClear = confirm("Você tem certeza que deseja limpar todo o código?");
+      if (confirmClear) {
+        editor.value = '';
+        updatePreview();
+      }
+    });
+
+    // 2. Botão Modo Escuro
+    const darkModeBtn = document.getElementById('darkModeBtn');
+    const moonIcon = document.getElementById('moonIcon');
+    const sunIcon = document.getElementById('sunIcon');
+    
+    darkModeBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+        moonIcon.classList.add('hidden');
+        sunIcon.classList.remove('hidden');
+      } else {
+        localStorage.setItem('theme', 'light');
+        moonIcon.classList.remove('hidden');
+        sunIcon.classList.add('hidden');
+      }
+      updatePreview(); // Atualiza o preview para refletir a mudança de tema
+    });
+
+    // 3. Botão Salvar
+    const saveBtn = document.getElementById('saveBtn');
+    saveBtn.addEventListener('click', () => {
+      const blob = new Blob([editor.value], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'meu-codigo.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    // --- EVENT LISTENERS ---
 
     editor.addEventListener('input', updatePreview);
-    window.addEventListener('load', updatePreview);
+    
+    // Verifica o tema salvo no localStorage ao carregar a página
+    window.addEventListener('load', () => {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        moonIcon.classList.add('hidden');
+        sunIcon.classList.remove('hidden');
+      }
+      updatePreview();
+    });
 
     editor.addEventListener('keydown', function(e) {
       if (e.key === 'Tab') {
         e.preventDefault();
         const start = this.selectionStart;
         const end = this.selectionEnd;
-
         const tab = "  ";
         this.value = this.value.substring(0, start) + tab + this.value.substring(end);
         this.selectionStart = this.selectionEnd = start + tab.length;
-
         updatePreview();
       }
     });
