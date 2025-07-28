@@ -15,16 +15,16 @@ Descrição para instalação dos softwares necessários:
 1. Crie a pasta do projeto 
 
 
-2. Inicie um projeto Node
+2. Inicie um projeto Node |
 npm init -y
 
-3. Instale Tailwind e dependências
+3. Instale Tailwind e dependências |
 npm install -D tailwindcss postcss autoprefixer
 
-4. Gere os arquivos de configuração
+4. Gere os arquivos de configuração |
 npx tailwindcss init -p
 
-5. Configure o Tailwind
+5. Configure o Tailwind |
 module.exports = {
   content: ["./*.html"],
   theme: {
@@ -33,15 +33,15 @@ module.exports = {
   plugins: [],
 };
 
-6. Crie um arquivo css com diretivas
+6. Crie um arquivo css com diretivas |
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-7. Compile com Tailwind 
+7. Compile com Tailwind |
 npx tailwindcss -i ./style.css -o ./dist/output.css --watch
 
-8. Conecte ele no seu HTML utilizando
+8. Conecte ele no seu HTML utilizando |
 link rel="stylesheet" href="dist/output.css"
 
 # Passo-a-Passo para o desenvolvimento:
