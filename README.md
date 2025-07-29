@@ -64,3 +64,6 @@ Sexto Passo: Agora começamos a aprimorar o site visualmente, adicionando alguns
 ![Passo 6](imagens/passo5.png)
 ![Passo 6](imagens/passo51.png)
 
+# Referencias
+Material e métodos utilizados para o desenvolvimento:
+	Como material e métodos utilizados no desenvolvimento foram utilizados videos tutoriais como “Curso de Tailwind CSS | Programação do ZERO ao AVANÇADO” do canal DevClub|Programação, as inteligências artificiais ChatGpt, Google Gemini, além do próprio site da TailwindCSS que nos proporciona uma lista de vídeos e tabelas com todas as classes que podemos utilizar na hora de construir nosso código com TailwindCSS, auxiliando em todos os passos de confecção do site.
